@@ -37,7 +37,7 @@ int main()
 	double manip_nubmer = 3.1415;
 
 	std::cout << "manip_nubmer = " << manip_nubmer << std::endl;
-	std::cout << "manip_nubmer to int = " << (int)manip_nubmer << std::endl;
+	std::cout << "manip_nubmer to int = " << int(manip_nubmer) << std::endl;
 	std::cout << std::setw(20) << std::right << std::setfill('$') << manip_nubmer << std::endl;
 
 	std::cout << std::setfill('-') << std::endl;
@@ -55,13 +55,13 @@ int main()
 
 	//Task 4
 
-	std::cout << "Monday: " << (int)(WeekDay::Monday) << std::endl;
-	std::cout << "Tuesday: " << (int)(WeekDay::Tuesday) << std::endl;
-	std::cout << "Wednesday: " << (int)(WeekDay::Wednesday) << std::endl;
-	std::cout << "Thursday: " << (int)(WeekDay::Thursday) << std::endl;
-	std::cout << "Friday: " << (int)(WeekDay::Friday) << std::endl;
-	std::cout << "Saturday: " << (int)(WeekDay::Saturday) << std::endl;
-	std::cout << "Sunday: " << (int)(WeekDay::Sunday) << std::endl;
+	std::cout << "Monday: " << int(WeekDay::Monday) << std::endl;
+	std::cout << "Tuesday: " << int(WeekDay::Tuesday) << std::endl;
+	std::cout << "Wednesday: " << int(WeekDay::Wednesday) << std::endl;
+	std::cout << "Thursday: " << int(WeekDay::Thursday) << std::endl;
+	std::cout << "Friday: " << int(WeekDay::Friday) << std::endl;
+	std::cout << "Saturday: " << int(WeekDay::Saturday) << std::endl;
+	std::cout << "Sunday: " << int(WeekDay::Sunday) << std::endl;
 
 	std::cout << std::setfill('-') << std::endl;
 
@@ -70,6 +70,6 @@ int main()
 	int boolean_number = 312;
 
 	std::cout << "Real number is " << boolean_number << std::endl;
-	std::cout << "Boolean number is " << (bool)boolean_number << std::endl;
-	std::cout << "In text format - " << std::boolalpha << (bool)boolean_number;
+	std::cout << "Boolean number is " << bool(boolean_number) << std::endl;
+	std::cout << "In text format - " << std::boolalpha << bool(boolean_number);
 }
