@@ -147,13 +147,13 @@ std::cout << std::setfill('-') << std::endl;
 ```cpp
 enum class WeekDay
 {
-	Monday = 1,
-	Tuesday,
-	Wednesday,
-	Thursday,
-	Friday,
-	Saturday,
-	Sunday
+Monday = 1,
+Tuesday,
+Wednesday,
+Thursday,
+Friday,
+Saturday,
+Sunday
 };
 
 std::cout << "Monday: " << int(WeekDay::Monday) << std::endl;
