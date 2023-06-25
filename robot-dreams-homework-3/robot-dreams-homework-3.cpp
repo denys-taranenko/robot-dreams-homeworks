@@ -25,7 +25,9 @@ int main()
 	int second_number;
 	std::cin >> second_number;
 
-	std::swap(first_number, second_number);
+	int temp = first_number;
+	first_number = second_number;
+	second_number = temp;
 
 	std::cout << "Integer 1: " << first_number << std::endl;
 	std::cout << "Integer 2: " << second_number << std::endl;
