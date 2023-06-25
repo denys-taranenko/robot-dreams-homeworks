@@ -69,6 +69,104 @@ int main()
 
 Також була перенесена Домашня робота №1 в єдиний репозиторій - [robot-dreams-homeworks](https://github.com/denys-taranenko/robot-dreams-homeworks).
 
-<img src="https://lh3.googleusercontent.com/a13TrjRnO5uCWYSXixeARiEqZVWnFcu8V7HMWkNI36BsHhHfLHH6aV03d0_0DovyHZonw08hrs0J4KhyzMzo0nFRceWWJxvL3CFbcsczOrZOGBAPZ8aHkrNYI5WadFhRqEORzmF_igY8oBrN6H5ZApQHLrvWLaPU_BkLqj61whj-FLQThWGckY_hkMzYDgLJFYDvlCFBynrmclc_yNPEMl6UyOIAyfTrD8JG75J7vo6uQTJBWt1D6gtd2bPFpA3a_LU8qQ0yBWDtOekKDlNoBPHWy7W_78SFThh4_KqD7JusRCmFejWUje9vwlnS1ZotDPlYWSnomBjXHn7soqBShqPJ-a03-jo73Ryf_CVXCZEJvT0De4vswIosiR3dOXV8B_WbxG_pqtmo47cZUdTFlicvQQCC7HooYe25vAqUh44J6LdkmiR9aXMTZU8vzmF3GweEosPztXRyRmBeS3Szvo2EtqrKND9dN62NNaLVe1GJ_HgqfYGf3eCEvB_q_p9pCOFXjBtAkSeIj3Ildys2OFIY4X6fWOHCWDCvcI0O-Nee3dwDO0e31gIGJt9RjEXJau4JYNN21ANIO5Q7QKNjwjbJ3AcGqQf94ls9JlK67PnQhszOFgy3Kw6FCNtMLmEnjFpLIs-BohDhbtKifP20PhP9M62yoEEVPzGPP_jm7iId6yyRDBqo2kZtNTju4pAyllKoPfswSrVtyty2OOJKTAYzidZXKGjRwjuUNDzw-xV8Ychn4R1gB37ny8xcpNlLVO3e9eGEAAUoAz_quDYKLSRUrioDEpKGhOxymEkugKnAS2RUz8YdiEwMsa-KIt9JIZ_LE9T5DfuXfZ79I2Gwq3Mx7YSutlwdaA52TlQQ4q8wVG6BOwSBWzvKh1GXssah5r8fMuQLTSSxKvA2b4aEpyoDRiGQ3u1tI0n8ExpT7Sgx=w1906-h954-s-no?authuser=0" width="800">
+</details>
 
+Домашня робота №3, на тему "**Змінні та типи даних**".
+
+### Завдання
+
+1. Зчитати з клавіатури 2 числа; Поміняти місцями значення змінних; надрукувати нові значення в консоль. 
+
+2. Створити та ініціалізувати змінну типу double, вивести значення змінної в консолі; вивести значення змінної приведене до типу int. (без символів після коми); Вивести число в рядок шириною 20 символів, вирівняти по правому краю, пусте місце заповнити символом '$'.
+
+3. Створити double змінну і вивести її в різних форматах: з різною точністю (2, 5, 10 знаків після коми), в різних нотаціях(standard, e-notation).
+
+4. Створити енам WeekDay, де кожному дню тижня відповідає порядковий номер (1-7). Вивести числове значення кожного дня тижня у консоль (за допомогою приведення типу з enam class в int).
+
+5. Зчитати число з консолі. Привести число до типу bool, вивести значення bool у текстовому форматі за допомогою відповідного I/O manipulator.
+
+### Реалізація
+
+Вихідний код програми наведено нижче:
+
+#### Завдання №1
+
+```cpp
+std::cout << "Enter integer 1: ";
+int first_number;
+std::cin >> first_number;
+
+std::cout << "Enter integer 2: ";
+int second_number;
+std::cin >> second_number;
+
+int temp = first_number;
+first_number = second_number;
+second_number = temp;
+
+std::cout << "Integer 1: " << first_number << std::endl;
+std::cout << "Integer 2: " << second_number << std::endl;
+
+std::cout << std::setfill('-') << std::endl;
+```
+
+#### Завдання №2
+
+```cpp
+double manip_nubmer = 3.1415;
+
+std::cout << "manip_nubmer = " << manip_nubmer << std::endl;
+std::cout << "manip_nubmer to int = " << int(manip_nubmer) << std::endl;
+std::cout << std::setw(20) << std::right << std::setfill('$') << manip_nubmer << std::endl;
+
+std::cout << std::setfill('-') << std::endl;
+```
+
+#### Завдання №3
+
+```cpp
+double different_formats = 3.1415;
+
+std::cout << "Standard Notation with two signs " << std::setprecision(2) << std::fixed << different_formats << std::endl;
+std::cout << "Standard Notation with ten characters " << std::setprecision(10) << std::fixed << different_formats << std::endl;
+std::cout << "E Notation with five signs " << std::setprecision(5) << std::scientific << different_formats << std::endl;
+std::cout << "E Notation with twenty characters " << std::setprecision(20) << std::scientific << different_formats << std::endl;
+
+std::cout << std::setfill('-') << std::endl;
+```
+
+#### Завдання №4
+
+```cpp
+enum class WeekDay
+{
+	Monday = 1,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday,
+	Sunday
+};
+
+std::cout << "Monday: " << int(WeekDay::Monday) << std::endl;
+std::cout << "Tuesday: " << int(WeekDay::Tuesday) << std::endl;
+std::cout << "Wednesday: " << int(WeekDay::Wednesday) << std::endl;
+std::cout << "Thursday: " << int(WeekDay::Thursday) << std::endl;
+std::cout << "Friday: " << int(WeekDay::Friday) << std::endl;
+std::cout << "Saturday: " << int(WeekDay::Saturday) << std::endl;
+std::cout << "Sunday: " << int(WeekDay::Sunday) << std::endl;
+
+std::cout << std::setfill('-') << std::endl;
+```
+
+#### Завдання №5
+
+```cpp
+int boolean_number = 312;
+
+std::cout << "Real number is " << boolean_number << std::endl;
+std::cout << "Boolean number is " << bool(boolean_number) << std::endl;
+std::cout << "In text format - " << std::boolalpha << bool(boolean_number);
+```
 </details>
