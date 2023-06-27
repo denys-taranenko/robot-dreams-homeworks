@@ -112,8 +112,9 @@ int main()
 
     std::cout << "Hello! This program works with circles!" << "\n";
 
+    double radius = 0.0;
+
     std::cout << "Enter the radius of the circle: ";
-    double radius;
     std::cin >> radius;
 
     double area = PI * radius * radius;
