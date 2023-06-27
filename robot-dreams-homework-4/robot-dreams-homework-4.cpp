@@ -112,18 +112,17 @@ int main()
 
     std::cout << "Hello! This program works with circles!" << "\n";
 
-    double radius = 0.0;
-
     std::cout << "Enter the radius of the circle: ";
+    double radius = 0.0;
     std::cin >> radius;
 
-    double area = PI * radius * radius;
-    double circum_ference = 2 * PI * radius;
+    const double area = PI * radius * radius;
+    const double circumference = 2 * PI * radius;
 
     std::cout << std::setfill('-') << std::endl;
 
     std::cout << "Area of the circle: " << std::fixed << std::setprecision(3) << area << std::endl;
-    std::cout << "Circumference of the circle: " << circum_ference << "\n";
+    std::cout << "Circumference of the circle: " << circumference << "\n";
 
     std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
 
