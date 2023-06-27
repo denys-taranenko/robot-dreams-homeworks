@@ -43,7 +43,7 @@ int main()
 
     int res_sum = first_number + second_number + third_number;
     int res_mult = first_number * second_number * third_number;
-    int average = res_sum / 3;
+    float average = float(res_sum) / 3;
 
     bool res_first_with_second = first_number >= second_number;
     bool res_second_with_third = second_number >= third_number;
