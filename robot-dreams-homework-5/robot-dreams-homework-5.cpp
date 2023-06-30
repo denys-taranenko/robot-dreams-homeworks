@@ -42,14 +42,11 @@ int main()
     if (first_number > second_number && first_number > third_number)
         std::cout << "The largest of these numbers is: " << first_number << "\n";
 
-    else if (second_number > first_number && second_number > third_number)
+    else if (second_number > third_number)
         std::cout << "The largest of these numbers is: " << second_number << "\n";
 
-    else if (third_number > first_number && third_number > second_number)
-        std::cout << "The largest of these numbers is: " << third_number << "\n";
-
     else
-        std::cout << "Sorry, something went wrong.\n";
+        std::cout << "The largest of these numbers is: " << third_number << "\n";
 
     std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
 
@@ -112,7 +109,10 @@ int main()
     float const second_inequality = first_corner + third_corner;
     float const third_inequality = second_corner + third_corner;
 
-    if (first_inequality > third_corner && second_inequality > second_corner && third_inequality > first_corner)
+    bool const is_triangle_formed = (first_corner > 0 && second_corner > 0 && third_corner > 0);
+    bool const satisfies_inequality = (first_inequality > third_corner && second_inequality > second_corner && third_inequality > first_corner);
+
+    if (is_triangle_formed && satisfies_inequality)
         std::cout << "So!A triangle will come out!\n";
     else
         std::cout << "Unfortunately, the triangle will not work.\n";
@@ -195,33 +195,32 @@ int main()
     std::cout << std::setfill('-') << std::endl;
 
     std::cout << "Enter a number from 1 to 12: ";
-    int season{};
-    std::cin >> season;
+    int month_number{};
+    std::cin >> month_number;
 
-    switch (season)
+    Month month_task_6 = Month(month_number);
+
+    switch (month_task_6)
     {
-    case 12:
-    case 1:
-    case 2:
+    case Month::December:
+    case Month::January:
+    case Month::February:
         std::cout << "Winter" << std::endl;
         break;
-    case 3:
-    case 4:
-    case 5:
+    case Month::March:
+    case Month::April:
+    case Month::May:
         std::cout << "Spring" << std::endl;
         break;
-    case 6:
-    case 7:
-    case 8:
+    case Month::June:
+    case Month::July:
+    case Month::August:
         std::cout << "Summer" << std::endl;
         break;
-    case 9:
-    case 10:
-    case 11:
+    case Month::September:
+    case Month::October:
+    case Month::November:
         std::cout << "Autumn" << std::endl;
-        break;
-    default:
-        std::cout << "Error: The entered number is incorrect." << std::endl;
         break;
     }
 
