@@ -105,17 +105,14 @@ int main()
     float third_corner{};
     std::cin >> third_corner;
 
-    float const first_inequality = first_corner + second_corner;
-    float const second_inequality = first_corner + third_corner;
-    float const third_inequality = second_corner + third_corner;
+    float const sum_of_angles = first_corner + second_corner + third_corner;
 
-    bool const is_triangle_formed = (first_corner > 0 && second_corner > 0 && third_corner > 0);
-    bool const satisfies_inequality = (first_inequality > third_corner && second_inequality > second_corner && third_inequality > first_corner);
+    bool const is_triangle_formed = (first_corner > 0 && second_corner > 0 && third_corner > 0 && sum_of_angles == 180);
 
-    if (is_triangle_formed && satisfies_inequality)
-        std::cout << "So!A triangle will come out!\n";
+    if (is_triangle_formed)
+        std::cout << "A triangle can be formed with the given angles!\n";
     else
-        std::cout << "Unfortunately, the triangle will not work.\n";
+        std::cout << "Unfortunately, a triangle cannot be formed with the given angles.\n";
 
     std::cout << std::setw(100) << std::setfill('-') << "" << std::endl;
 
