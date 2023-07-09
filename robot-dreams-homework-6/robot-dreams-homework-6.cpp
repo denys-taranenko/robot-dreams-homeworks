@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <iomanip>
+#include <cctype>
 
 int main()
 {
@@ -169,11 +170,11 @@ int main()
         std::cout << "Enter a character: ";
         std::cin >> symbol;
 
-        if (symbol >= 'a' && symbol <= 'z') {
-            symbol = symbol - 'a' + 'A';
+        if (std::islower(symbol)) {
+            symbol = std::toupper(symbol);
             std::cout << "Upper case letter: " << symbol << std::endl;
         }
-        else if (symbol >= '0' && symbol <= '9') {
+        else if (std::isdigit(symbol)) {
             sum += symbol - '0';
             std::cout << "Current sum of digits: " << sum << std::endl;
         }
