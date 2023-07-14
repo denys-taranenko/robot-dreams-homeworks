@@ -85,17 +85,18 @@ int generateRandomNumber(int difficulty_level)
 	const int MIN_RANGE = 101;
 
 	std::mt19937 rng(time(0));
-	switch (difficulty_level)
+	while (true)
 	{
-	case 1:
-		return rng() % WEAKLY_MAX_RANGE;
-	case 2:
-		return rng() % MIN_RANGE - MAX_RANGE;
-	case 3:
-		return rng() % MIN_RANGE - MAX_RANGE;
-	default:
-		handleInvalidInput();
-		return generateRandomNumber(getDifficultyLevel());
+		switch (difficulty_level)
+		{
+		case 1: 
+			return rng() % WEAKLY_MAX_RANGE;
+		case 2:
+		case 3: 
+			return rng() % MIN_RANGE - MAX_RANGE;
+		default:
+			handleInvalidInput();
+		}
 	}
 }
 
@@ -110,10 +111,11 @@ int getUserNumber()
 	cout << "Try to guess: ";
 	cin >> user_number;
 
-	if (!cin)
+	while (!cin)
 	{
 		handleInvalidInput();
-		return getUserNumber();
+		cout << "Try to guess again: ";
+		cin >> user_number;
 	}
 
 	return user_number;
@@ -150,9 +152,10 @@ void startNewGame(int difficulty_level, int& best_record, int& last_record)
 	using std::cout;
 	using std::endl;
 
+	const int HIGH_DIFFICULTY_ATTEMPS = 7;
 	int attempts = 0;
 	int number_to_guess = generateRandomNumber(difficulty_level);
-	int max_attempts = (difficulty_level == 3) ? 7 : INT_MAX;
+	const int max_attempts = (difficulty_level == 3) ? HIGH_DIFFICULTY_ATTEMPS : INT_MAX;
 
 	cout << "WELL! I MADE A NUMBER!\n";
 
