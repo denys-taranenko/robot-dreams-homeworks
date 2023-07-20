@@ -18,7 +18,9 @@ void translateArray(int numbers[], int size) {
 
 void toUppercase(char str[]) {
 
-	for (int i = 0; i < strlen(str); i++)
+	int length = strlen(str);
+	
+	for (int i = 0; i < length; i++)
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')
 		{
@@ -70,17 +72,19 @@ void parseStringLetters(const char str[], int& vowels_count, int& constonants_co
 }
 
 bool isEqual(const char str1[], const char str2[]) {
-
+	
 	int i = 0;
 
-	while (str1[i] != '\0' || str2[i] != '\0')
+	while (str1[i] == str2[i]) 
 	{
-		if (str1[i] != str2[i])
+
+		if (str1[i] == '\0') 
 		{
-			return false;
+			return true;
 		}
+
 		i++;
 	}
 
-	return true;
+	return false;
 }
