@@ -2,10 +2,6 @@
 #include <iomanip>
 #include "algorithm.h"
 
-enum class SortingDirection {
-    ascending,
-    descending
-};
 
 int main()
 {
