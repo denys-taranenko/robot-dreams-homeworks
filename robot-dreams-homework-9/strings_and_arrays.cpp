@@ -72,19 +72,34 @@ void parseStringLetters(const char str[], int& vowels_count, int& constonants_co
 }
 
 bool isEqual(const char str1[], const char str2[]) {
-	
-	int i = 0;
 
-	while (str1[i] == str2[i]) 
+	int length_1 = 0;
+	while (str1[length_1] != '\0') 
 	{
-
-		if (str1[i] == '\0') 
-		{
-			return true;
-		}
-
-		i++;
+		length_1++;
 	}
 
-	return false;
+	int length_2 = 0;
+	while (str2[length_2] != '\0') 
+	{
+		length_2++;
+	}
+
+
+	if (length_1 != length_2) 
+	{
+		return false;
+	}
+
+
+	for (int i = 0; i < length_1; i++) 
+	{
+		if (str1[i] != str2[i]) 
+		{
+			return false;
+		}
+	}
+
+
+	return true;
 }
