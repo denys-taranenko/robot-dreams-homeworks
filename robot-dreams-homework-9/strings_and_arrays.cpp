@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cctype>
+#include <cstring>
 
 void translateArray(int numbers[], int size) {
 
@@ -72,34 +73,18 @@ void parseStringLetters(const char str[], int& vowels_count, int& constonants_co
 }
 
 bool isEqual(const char str1[], const char str2[]) {
+	size_t length_1 = strlen(str1);
+	size_t length_2 = strlen(str2);
 
-	int length_1 = 0;
-	while (str1[length_1] != '\0') 
-	{
-		length_1++;
-	}
-
-	int length_2 = 0;
-	while (str2[length_2] != '\0') 
-	{
-		length_2++;
-	}
-
-
-	if (length_1 != length_2) 
-	{
+	if (length_1 != length_2) {
 		return false;
 	}
 
-
-	for (int i = 0; i < length_1; i++) 
-	{
-		if (str1[i] != str2[i]) 
-		{
+	for (size_t i = 0; i < length_1; i++) {
+		if (str1[i] != str2[i]) {
 			return false;
 		}
 	}
-
 
 	return true;
 }
