@@ -1054,3 +1054,801 @@ cycle_functions.h / cycle_functions.cpp
 recursion_functions.h / recursion_functions.cpp
 
 </details>
+
+<details>
+  <summary><h2>Домашня робота №9</h2></summary>
+
+## Домашнє завдання
+
+### Опис
+
+Домашня робота №9, на тему "**Строки і масиви**".
+
+### Завдання
+
+1. Користувач зчитує з клавіатури масив, розмір 10. Написати функцію, яка додатні елементи масиву множить на 2, від’ємні робить 0. void translateArray(int numbers[], int size); Вивести масив у консоль.
+2. Зчитати рядок з консолі. Функція, яка перетворює усі символи латиниці у верхній регістр. void toUppercase(char str[]).
+3. Функція, яка перевіряє чи введений рядок паліндром. bool isPalindrom(const char str[]).
+4. Функція, яка підраховує кількість голосних та приголосних у рядку. void parseStringLetters(const char[] str, int& vowelsCount, int& constonantsCount).
+5. Функція для порівняння двох рядків без використання вбудованих бібліотек. bool isEqual(const char str1[], const char str2[]).
+
+### Реалізація
+
+Вихідний код програми наведено нижче:
+
+1. Файл optional_for_arrays.cpp:
+
+```cpp
+#include <iostream>
+
+void printArray(int numbers[], int size) {
+
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << numbers[i] << " ";
+	}
+}
+
+void printArray(char str[]) {
+
+std::cout << str;
+}
+
+void writeToArray(int numbers[], int size) {
+
+	for (int i = 0; i < size; i++)
+	{
+		std::cin >> numbers[i];
+	}
+}
+
+void writeToArray(char str[], int size) {
+
+std::cin.getline(str, size);
+}
+```
+
+2. Файл optional_for_arrays.h:
+
+```cpp
+#pragma once
+
+void printArray(int numbers[], int size);
+void printArray(char str[]);
+void writeToArray(int numbers[], int size);
+void writeToArray(char str[], int size);
+```
+
+3. Файл strings_and_arrays.cpp:
+
+```cpp
+#include <iostream>
+#include <cctype>
+#include <cstring>
+
+void translateArray(int numbers[], int size) {
+
+	for (int i = 0; i < size; i++)
+	{
+		if (numbers[i] > 0)
+		{
+			numbers[i] *= 2;
+		}
+		else
+		{
+			numbers[i] = 0;
+		}
+	}
+}
+
+void toUppercase(char str[]) {
+
+int length = strlen(str);
+	
+	for (int i = 0; i < length; i++)
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+		{
+			str[i] = str[i] - ('a' - 'A');
+		}
+	}
+}
+
+bool isPalindrom(const char str[]) {
+
+int left = 0;
+int right = strlen(str) - 1;
+
+	while (left < right)
+	{
+		if (str[left] != str[right])
+		{
+			return false;
+		}
+
+		left++;
+		right--;
+	}
+
+return true;
+}
+
+void parseStringLetters(const char str[], int& vowels_count, int& constonants_count) {
+
+vowels_count = 0;
+constonants_count = 0;
+
+	for (int i = 0; str[i] != '\0'; i++)
+	{
+		char letter = std::tolower(str[i]);
+
+		if (std::isalpha(letter))
+		{
+			if (std::strchr("aeiou", letter) != nullptr)
+			{
+				vowels_count++;
+			}
+			else
+			{
+				constonants_count++;
+			}
+		}
+	}
+}
+
+bool isEqual(const char str1[], const char str2[]) {
+	size_t length_1 = strlen(str1);
+	size_t length_2 = strlen(str2);
+
+	if (length_1 != length_2) {
+		return false;
+	}
+
+	for (size_t i = 0; i < length_1; i++) {
+		if (str1[i] != str2[i]) {
+			return false;
+		}
+	}
+
+return true;
+}
+```
+
+4. Файл strings_and_arrays.h:
+
+```cpp
+#pragma once
+
+void translateArray(int numbers[], int size);
+void toUppercase(char str[]);
+bool isPalindrom(const char str[]);
+void parseStringLetters(const char str[], int& vowels_count, int& constonants_count);
+bool isEqual(const char str1[], const char str2[]);
+```
+
+5. Файл robot-dreams-homework-9.cpp:
+
+```cpp
+﻿#include <iostream>
+#include <iomanip>
+#include "optional_for_arrays.h"
+#include "strings_and_arrays.h"
+
+int main() {
+	
+const int INT_ARRAY_LENGTH = 10;
+const int CHAR_ARRAY_LENGTH = 256;
+	
+	//Task 1
+	
+int numbers[INT_ARRAY_LENGTH]{};
+
+std::cout << "Enter 10 values separated by a space: ";
+	
+writeToArray(numbers, INT_ARRAY_LENGTH);
+translateArray(numbers, INT_ARRAY_LENGTH);
+printArray(numbers, INT_ARRAY_LENGTH);
+
+std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+std::cout << std::endl << std::endl;
+
+	//Task 2
+	
+char str_for_uppercase[CHAR_ARRAY_LENGTH]{};
+
+std::cout << "Enter a string to convert to UPPERCASE: ";
+	
+writeToArray(str_for_uppercase, CHAR_ARRAY_LENGTH);
+toUppercase(str_for_uppercase);
+printArray(str_for_uppercase);
+
+std::cout << std::endl << std::endl;
+
+	//Task 3
+
+char str_palindrome[CHAR_ARRAY_LENGTH]{};
+	
+std::cout << "Enter a palindrome (well, or not a palindrome): ";
+
+writeToArray(str_palindrome, CHAR_ARRAY_LENGTH);
+
+	if (isPalindrom(str_palindrome))
+	{
+		std::cout << std::boolalpha << true;
+	}
+	else
+	{
+		std::cout << std::boolalpha << false;
+	}
+
+	std::cout << std::endl << std::endl;
+
+	//Task 4
+
+char str_vowels_and_consonants[CHAR_ARRAY_LENGTH]{};
+int vowels_count = 0;
+int constonants_count = 0;
+
+std::cout << "Enter a string to count the number of vowels and constonants: ";
+
+writeToArray(str_vowels_and_consonants, CHAR_ARRAY_LENGTH);
+parseStringLetters(str_vowels_and_consonants, vowels_count, constonants_count);
+
+std::cout << "Number of vowels: " << vowels_count << std::endl;
+std::cout << "Number of consonants: " << constonants_count << std::endl;
+
+std::cout << std::endl << std::endl;
+
+	//Task 5
+
+char first_str[CHAR_ARRAY_LENGTH]{};
+char second_str[CHAR_ARRAY_LENGTH]{};
+
+std::cout << "Enter the first string to compare: ";
+writeToArray(first_str, CHAR_ARRAY_LENGTH);
+
+std::cout << "Enter the second string to compare: ";
+writeToArray(second_str, CHAR_ARRAY_LENGTH);
+
+	if (isEqual(first_str, second_str))
+	{
+		std::cout << std::boolalpha << true;
+	}
+	else
+	{
+		std::cout << std::boolalpha << false;
+	}
+
+return 0;
+}
+```
+</details>
+
+<details>
+  <summary><h2>Домашня робота №10</h2></summary>
+
+## Домашнє завдання
+
+### Опис
+
+Домашня робота №10, на тему "**Посилання та вказівники**".
+
+### Завдання
+
+1. Реалізувати функції void swap(int& a, int& b); void swap(int* a, int* b); які приймають як вхідні параметри дві int змінні та змінюють їх місцями двома способами: з використанням вказівників та посилань.
+2. Створити функцію bool calculateSum(const double* arr, int arrSize, double& sum);  яка записує у змінну sum суму всіх елементів довільного масиву, якщо розмір масиву > 0 та повертає true, інакше повертає false.
+3. Реалізувати функцію bool find(const int* arr, int size, int elem), яка повертає true, якщо число знайдено у масиві, false інакше. Зробити задачу з використанням арифметики над вказівниками (без використання оператора доступу до елементів вектора []).
+
+### Реалізація
+
+Вихідний код програми наведено нижче:
+
+1. Файл links_and_pointers.cpp:
+
+```cpp
+void swap(int& a, int& b) {
+
+int temp = a;
+a = b;
+b = temp;
+}
+
+
+void swap(int* a, int* b) {
+
+int temp = *a;
+*a = *b;
+*b = temp;
+}
+
+
+bool calculateSum(const double* arr, int arrSize, double& sum) {
+
+    if (arrSize == 0)
+    {
+        return false;
+    }
+
+sum = 0.0;
+    for (int i = 0; i < arrSize; i++)
+    {
+        sum += arr[i];
+    }
+return true;
+}
+
+
+bool find(const int* arr, int size, int elem) {
+
+const int* end = arr + size;
+
+    while (arr < end)
+    {
+        if (*arr == elem)
+        {
+            return true;
+        }
+        arr++;
+    }
+
+return false;
+}
+```
+
+2. Файл links_and_pointers.h:
+
+```cpp
+#pragma once
+
+void swap(int& a, int& b);
+void swap(int* a, int* b);
+bool calculateSum(const double* arr, int arrSize, double& sum);
+bool find(const int* arr, int size, int elem);
+```
+
+3. Файл robot-dreams-homework-10.cpp:
+
+```cpp
+﻿#include <iostream>
+#include "links_and_pointers.h"
+
+int main()
+{
+    
+    //Task 1
+    
+int first_value = 10;
+int second_value = 20;
+
+std::cout << "Exchange using links (BEFORE)" << std::endl;
+std::cout << "first_value = " << first_value << std::endl;
+std::cout << "second_value = " << second_value << std::endl << std::endl;
+
+swap(first_value, second_value);
+
+std::cout << "Exchange using links (AFTER)" << std::endl;
+std::cout << "first_value = " << first_value << std::endl;
+std::cout << "second_value = " << second_value << std::endl << std::endl;
+
+std::cout << "Exchange using pointers (BEFORE)" << std::endl;
+std::cout << "first_value = " << first_value << std::endl;
+std::cout << "second_value = " << second_value << std::endl << std::endl;
+
+swap(&first_value, &second_value);
+
+std::cout << "Exchange using pointers (AFTER)" << std::endl;
+std::cout << "first_value = " << first_value << std::endl;
+std::cout << "second_value = " << second_value << std::endl << std::endl;
+
+    //Task 2
+
+const int ARR_SIZE = 5;
+double arr[ARR_SIZE] = { 1.5, 2.0, 3.5, 4.0, 5.5 };
+double sum = 0.0;
+
+    if (calculateSum(arr, ARR_SIZE, sum))
+    {
+        std::cout << "The sum of the array = " << sum << std::endl << std::endl;
+    }
+    else 
+    {
+        std::cout << "Array size is invalid." << std::endl << std::endl;
+    }
+
+    //Task 3
+
+int array[] = { 1, 2, 3, 4, 5 };
+int size = sizeof(array) / sizeof(int);
+int elem = 2;
+
+    if (find(array, size, elem)) 
+    {
+        std::cout << "Item found!" << std::endl;
+    }
+    else 
+    {
+        std::cout << "Item not found." << std::endl;
+    }
+
+return 0;
+}
+```
+</details>
+
+<details>
+  <summary><h2>Домашня робота №11</h2></summary>
+
+## Домашнє завдання
+
+### Опис
+
+Домашня робота №11, на тему "**Алгоритми. Робота з циклами. Робота з масивами**".
+
+### Завдання
+
+1. Реалізувати функцію лінійого пошуку в двовимірному масиві.
+2. Функція bool isSorted(const int* arr, SortingDirection direction) яка перевіряє, чи даний масив посортований за спаданням, зростанням, де SortingDirection: enum class { ascending, descending }.
+3. Написати функції обходу двовимірного масива різними способами.
+
+### Реалізація
+
+Вихідний код програми наведено нижче:
+
+1. Файл algorithm.cpp:
+
+```cpp
+#include <iostream>
+
+bool linearSearch(int** arr, int rows, int columns, int target) {
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            if (arr[i][j] == target)
+            {
+                return true;
+            }
+        }
+    }
+
+return false;
+}
+
+
+enum class SortingDirection {
+    ascending,
+    descending
+};
+
+
+bool isSorted(const int* arr, int size, SortingDirection direction) {
+
+    if (direction == SortingDirection::ascending)
+    {
+        for (int i = 1; i < size; ++i)
+        {
+            if (arr[i] < arr[i - 1])
+            {
+                return false;
+            }
+        }
+    }
+    else if (direction == SortingDirection::descending)
+    {
+        for (int i = 1; i < size; ++i)
+        {
+            if (arr[i] > arr[i - 1])
+            {
+                return false;
+            }
+        }
+    }
+
+return true;
+}
+
+
+void traverseByColumns(int** arr, int rows, int columns) {
+
+    for (int i = columns - 1; i >= 0; i--)
+    {
+        for (int j = 0; j < rows; j++)
+        {
+            std::cout << arr[j][i] << " ";
+        }
+    }
+
+std::cout << std::endl;
+}
+
+
+void traverseByRows(int** arr, int rows, int columns) {
+
+    for (int i = rows - 1; i >= 0; i--)
+    {
+        bool isOddRow = (rows - 1 - i) % 2 == 0;
+
+        if (isOddRow)
+        {
+
+            for (int j = 0; j < columns; j++)
+            {
+                std::cout << arr[i][j] << " ";
+            }
+        }
+        else
+        {
+
+            for (int k = columns - 1; k >= 0; k--)
+            {
+                std::cout << arr[i][k] << " ";
+            }
+        }
+    }
+
+std::cout << std::endl;
+}
+```
+
+2. Файл algorithm.h:
+
+```cpp
+#pragma once
+
+bool linearSearch(int** arr, int rows, int columns, int target);
+enum class SortingDirection {
+    ascending,
+    descending
+};
+bool isSorted(const int* arr, int size, SortingDirection direction);
+void traverseByColumns(int** arr, int rows, int columns);
+void traverseByRows(int** arr, int rows, int columns);
+```
+
+3. Файл robot-dreams-homework-11.cpp:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include "algorithm.h"
+
+
+int main()
+{
+const int ROWS = 4;
+const int COLUMNS = 6;
+    
+int arr_2d[ROWS][COLUMNS] = {
+        { 11, 12, 13, 14, 15, 16 },
+        { 21, 22, 23, 24, 25, 26 },
+        { 31, 32, 33, 34, 35, 36 },
+        { 41, 42, 43, 44, 45, 46 }
+    };
+
+int* ptr_arr[ROWS];
+    for (int i = 0; i < ROWS; i++) 
+    {
+        ptr_arr[i] = arr_2d[i];
+    }
+
+int arr_ascending[COLUMNS] = { 1, 2, 3, 4, 5, 6 };
+int arr_descending[COLUMNS] = { 6, 5, 4, 3, 2, 1 };
+
+    //Task 1
+
+std::cout << std::boolalpha << linearSearch(ptr_arr, ROWS, COLUMNS, 46) << std::endl;
+std::cout << std::boolalpha << linearSearch(ptr_arr, ROWS, COLUMNS, 236) << std::endl;
+
+    //Task 2
+
+std::cout << isSorted(arr_ascending, COLUMNS, SortingDirection::ascending) << std::endl;
+std::cout << isSorted(arr_descending, COLUMNS, SortingDirection::descending) << std::endl;
+
+std::cout << isSorted(arr_ascending, COLUMNS, SortingDirection::descending) << std::endl;
+std::cout << isSorted(arr_descending, COLUMNS, SortingDirection::ascending) << std::endl;
+
+    //Task 3
+
+traverseByColumns(ptr_arr, ROWS, COLUMNS);
+traverseByRows(ptr_arr, ROWS, COLUMNS);
+
+return 0;
+}
+```
+</details>
+
+<details>
+  <summary><h2>Домашня робота №12</h2></summary>
+
+## Домашнє завдання
+
+### Опис
+
+Домашня робота №12, на тему "**Алгоритми. Складність. Пошук. Сортування**".
+
+### Завдання
+
+1. Реалізувати void bubleSort(int arr[], int size) для сортування вхідного масиву алгоритмом сортування бульбашкою.
+2. Використовуючи представлену у лекції реалізацію швидкого сортування відсортувати двовимірний масив по рядкам/стовпцям: void sort(int arr[][COLUMN], int rows, SortingDirection); enum class SortingDirection{ByRows, byColumn}.
+
+### Реалізація
+
+Вихідний код програми наведено нижче:
+
+1. Файл sorting.cpp:
+
+```cpp
+#include "sorting.h"
+#include <iostream>
+
+void printArray(int arr[], int size) {
+    
+    for (int i = 0; i < size - 1; i++) 
+    {
+        std::cout << arr[i] << " ";
+    }
+}
+
+
+void printArray(int arr[][COLUMN], int rows) {
+    
+    for (int i = 0; i < rows; i++) 
+    {
+        for (int j = 0; j < COLUMN; j++) 
+        {
+            std::cout << arr[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+
+void bubleSort(int arr[], int size) {
+    
+    for (int i = 0; i < size - 1; i++) 
+    {
+        int swapped = 0;
+
+        for (int j = 0; j < size - i - 1; j++) 
+        {
+            if (arr[j] > arr[j + 1]) 
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = 1;
+            }
+        }
+        if (swapped == 0)
+            break;
+    }
+}
+
+
+int partition(int array[], int low, int high) {
+    
+int pivot = array[high];
+int pointerIdx = low;
+
+    for (int j = low; j < high; j++) 
+    {
+        if (array[j] <= pivot) 
+        {
+            std::swap(array[pointerIdx], array[j]);
+            pointerIdx++;
+        }
+    }
+std::swap(array[pointerIdx], array[high]);
+
+return pointerIdx;
+}
+
+
+void quickSort(int array[], int low, int high) {
+   
+    if (low < high) 
+    {
+        int partition_idx = partition(array, low, high);
+        quickSort(array, low, partition_idx - 1);
+        quickSort(array, partition_idx + 1, high);
+    }
+}
+
+
+void sort(int arr[][COLUMN], int rows, SortingDirection direction) {
+    
+    if (direction == SortingDirection::ByRows) 
+    {
+        for (int i = 0; i < rows; i++) 
+        {
+            quickSort(arr[i], 0, COLUMN - 1);
+        }
+    }
+    else if (direction == SortingDirection::ByColumn) 
+    {
+        for (int j = 0; j < COLUMN; j++) 
+        {
+            int column[COLUMN];
+            
+            for (int i = 0; i < rows; i++) 
+            {
+                column[i] = arr[i][j];
+            }
+
+            quickSort(column, 0, rows - 1);
+            
+            for (int i = 0; i < rows; i++) 
+            {
+                arr[i][j] = column[i];
+            }
+        }
+    }
+}
+```
+
+2. Файл sorting.h:
+
+```cpp
+#pragma once
+
+const int COLUMN = 5;
+
+enum class SortingDirection {
+    ByRows,
+    ByColumn
+};
+
+void printArray(int arr[], int size);
+void printArray(int arr[][COLUMN], int rows);
+void bubleSort(int arr[], int size);
+int partition(int array[], int low, int high);
+void quickSort(int array[], int low, int high);
+void sort(int arr[][COLUMN], int rows, SortingDirection direction);
+```
+
+3. Файл robot-dreams-homework-12.cpp:
+
+```cpp
+﻿#include <iostream>
+#include "sorting.h"
+
+int main() {
+    
+const int SIZE = 10;
+const int ROWS = 5;
+
+int arr[SIZE] = { 5, 8, 15, 36, 44, 89, 127, 1, 6, 16 };
+
+int arr_2d[ROWS][COLUMN] = {
+        { 7, 3, 9, 5, 1 },
+        { 4, 2, 8, 6, 2 },
+        { 5, 1, 7, 3, 9 },
+        { 2, 8, 4, 2, 8 },
+        { 1, 6, 3, 9, 5 }
+    };
+
+    // Task 1
+
+bubleSort(arr, SIZE);
+printArray(arr, SIZE);
+
+std::cout << std::endl << std::endl;
+
+    // Task 2
+
+SortingDirection direction = SortingDirection::ByRows;
+sort(arr_2d, ROWS, direction);
+printArray(arr_2d, ROWS);
+
+std::cout << std::endl << std::endl;
+
+direction = SortingDirection::ByColumn;
+sort(arr_2d, ROWS, SortingDirection::ByColumn);
+printArray(arr_2d, ROWS);
+
+return 0;
+}
+```
+</details>
