@@ -2,9 +2,9 @@
 
 void displayWord(const char* targetWord, const char* guessedWord);
 void loadRandomWord(const char* filename, char* word);
-void loadGameState(const char* gameStateFile, std::string& lastGuessedDateStr, char* targetWordToGuess, bool& isWordOfTheDayGuessedToday);
+void loadGameState(const char* gameStateFile, std::string& lastGuessedDateStr, bool& isWordOfTheDayGuessedToday);
 void playWordle(const char* database, char* targetWord);
-void saveGameState(const char* gameStateFile, const std::string& lastGuessedDateStr, const char* targetWordToGuess, const bool isWordOfTheDayGuessedToday);
+void saveGameState(const char* gameStateFile, const std::string& lastGuessedDateStr, const bool isWordOfTheDayGuessedToday);
 int getMenuChoice();
 std::string getCurrentDateStr();
 bool isValidWord(const char* word);

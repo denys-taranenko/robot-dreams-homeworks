@@ -11,6 +11,10 @@
 const int WORD_LENGTH = 5;
 const int DATE_BUFFER_SIZE = 11;
 
+const int MAX_GUESSED_WORDS = 100;
+char guessedWords[MAX_GUESSED_WORDS][WORD_LENGTH + 1];
+int guessedWordCount = 0;
+
 std::string getCurrentDateStr() {
 
     std::time_t t = std::time(nullptr);
@@ -27,21 +31,23 @@ bool isValidWord(const char* word) {
 }
 
 void loadRandomWord(const char* filename, char* word) {
-
     std::ifstream file(filename);
+
     int wordCount = 0;
-    while (file >> word)
-    {
+    std::string line;
+    while (std::getline(file, line)) {
         wordCount++;
     }
+
     file.clear();
     file.seekg(0, std::ios::beg);
 
     int randomIndex = std::rand() % wordCount;
-    for (int i = 0; i <= randomIndex; i++)
-    {
-        file >> word;
+
+    for (int i = 0; i < randomIndex; i++) {
+        std::getline(file, line);
     }
+    std::strncpy(word, line.c_str(), WORD_LENGTH);
     file.close();
 }
 
@@ -53,7 +59,7 @@ void displayWord(const char* targetWord, const char* guessedWord) {
         {
             std::cout << static_cast<char>(std::toupper(targetWord[i]));
         }
-        else if (std::strchr(targetWord, guessedWord[i]))
+        else if (std::strchr(targetWord, guessedWord[i]) && targetWord[i] != guessedWord[i])
         {
             std::cout << static_cast<char>(std::tolower(guessedWord[i]));
         }
@@ -65,31 +71,24 @@ void displayWord(const char* targetWord, const char* guessedWord) {
     std::cout << std::endl;
 }
 
-void loadGameState(const char* gameStateFile, std::string& lastGuessedDateStr, char* targetWordToGuess, bool& isWordOfTheDayGuessedToday) {
-
+void loadGameState(const char* gameStateFile, std::string& lastGuessedDateStr, bool& isWordOfTheDayGuessedToday) {
     std::ifstream stateInput(gameStateFile);
 
-    if (stateInput)
-    {
+    if (stateInput) {
         stateInput >> lastGuessedDateStr;
 
-        if (lastGuessedDateStr == getCurrentDateStr())
-        {
-            stateInput >> targetWordToGuess;
+        if (lastGuessedDateStr == getCurrentDateStr()) {
             stateInput >> isWordOfTheDayGuessedToday;
         }
     }
     stateInput.close();
 }
 
-void saveGameState(const char* gameStateFile, const std::string& lastGuessedDateStr, const char* targetWordToGuess, const bool isWordOfTheDayGuessedToday) {
-
+void saveGameState(const char* gameStateFile, const std::string& lastGuessedDateStr, const bool isWordOfTheDayGuessedToday) {
     std::ofstream stateOutput(gameStateFile);
 
-    if (stateOutput)
-    {
+    if (stateOutput) {
         stateOutput << lastGuessedDateStr << ' ';
-        stateOutput << targetWordToGuess << ' ';
         stateOutput << isWordOfTheDayGuessedToday;
     }
     stateOutput.close();
@@ -122,7 +121,7 @@ void playWordle(const char* database, char* targetWord) {
 
     while (true)
     {
-        std::cout << "Enter your guess (5 letters): ";
+        std::cout << "Enter your guess (" + std::to_string(WORD_LENGTH) + " letters): ";
         std::cin >> guessedWord;
 
         attempts++;
@@ -147,15 +146,29 @@ void playWordle(const char* database, char* targetWord) {
 }
 
 void handleWordleOfTheDay(const char* wordOfTheDayDatabase, char* targetWord, bool& isWordOfTheDayGuessed, std::string& lastGuessedDate) {
+    bool wordAlreadyGuessed = false;
 
-    if (!isWordOfTheDayGuessed || lastGuessedDate != getCurrentDateStr())
-    {
-        playWordle(wordOfTheDayDatabase, targetWord);
-        isWordOfTheDayGuessed = true;
-        lastGuessedDate = getCurrentDateStr();
+    for (int i = 0; i < guessedWordCount; i++) {
+        if (std::strcmp(targetWord, guessedWords[i]) == 0) {
+            wordAlreadyGuessed = true;
+            break;
+        }
     }
-    else
-    {
+
+    if (!isWordOfTheDayGuessed || lastGuessedDate != getCurrentDateStr()) {
+        if (!wordAlreadyGuessed) {
+            playWordle(wordOfTheDayDatabase, targetWord);
+            isWordOfTheDayGuessed = true;
+            lastGuessedDate = getCurrentDateStr();
+
+            std::strcpy(guessedWords[guessedWordCount], targetWord);
+            guessedWordCount++;
+        }
+        else {
+            std::cout << "This word has already been guessed. Try again tomorrow!\n";
+        }
+    }
+    else {
         std::cout << "You have already guessed the word of the day. Try again tomorrow!\n";
     }
 }
