@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <cmath>
 #include "rectangle.h"
-#include "vector.h"
+#include "work_with_vector.h"
 
 int main()
 {
