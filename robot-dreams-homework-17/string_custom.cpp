@@ -44,15 +44,14 @@ StringCustom& StringCustom::operator=(const char* c_str) {
 }
 
 void StringCustom::assign(const char* c_str) {
-    if (c_str == nullptr) 
+    delete[] m_str;
+    if (c_str == nullptr)
     {
-        delete[] m_str;
         m_str = new char[1];
         m_str[0] = '\0';
     }
-    else 
+    else
     {
-        delete[] m_str;
         m_str = new char[strlen(c_str) + 1];
         strcpy(m_str, c_str);
     }
