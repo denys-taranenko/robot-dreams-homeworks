@@ -1,0 +1,20 @@
+UndeadWeapon;Dark Sword;5
+Weapon;Sword of Valor;4
+ZombieWeapon;Decaying Axe;3
+UndeadWeapon;Cursed Dagger;2
+Weapon;Enchanted Bow;3
+ZombieWeapon;Rotting Club;1
+Weapon;Mighty Hammer;4
+UndeadWeapon;Shadow Staff;6
+Weapon;Dueling Rapier;3
+ZombieWeapon;Foul Mace;2
+UndeadWeapon;Soul Blade;7
+Weapon;Thunder Staff;5
+ZombieWeapon;Poisoned Dagger;1
+UndeadWeapon;Death Scythe;8
+Weapon;Fireball Wand;4
+ZombieWeapon;Corroded Sword;2
+UndeadWeapon;Wraith Blade;6
+Weapon;Ice Bow;3
+ZombieWeapon;Spiked Club;1
+UndeadWeapon;Necromancer Staff;9
