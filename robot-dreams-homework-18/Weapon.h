@@ -12,7 +12,7 @@ public:
 
 	std::string getName() const { return name; }
 protected:
-	std::string name = nullptr;
+	std::string name = "";
 	int damageLevel = 0;
 	float accuracy = 0.0f;
 	float effectiveAccuracy = 0.0f;
@@ -26,16 +26,7 @@ public:
 	MeleeWeapon(std::string name, int damageLevel, float accuracy, float effectiveAccuracy, float weight)
 		: Weapon(name, damageLevel, accuracy, effectiveAccuracy, weight) {}
 
-	virtual int getDamageRate(int distance) const override
-	{
-		if (distance <= 10) 
-		{
-			float adjustedAccuracy = accuracy * (10.0f / distance);
-			float damageMultiplier = std::min(1.0f, adjustedAccuracy / effectiveAccuracy);
-			return damageLevel * damageMultiplier;
-		}
-		return 0;
-	}
+	virtual int getDamageRate(int distance) const override;
 };
 
 
@@ -66,13 +57,7 @@ public:
 	RangedWeapon(std::string name, int damageLevel, float accuracy, float effectiveAccuracy, float weight)
 		: Weapon(name, damageLevel, accuracy, effectiveAccuracy, weight) {}
 
-	virtual int getDamageRate(int distance) const override 
-	{
-		float precision = getPrecision(distance);
-		float adjustedAccuracy = accuracy * precision;
-		float damageMultiplier = std::min(1.0f, adjustedAccuracy / effectiveAccuracy);
-		return static_cast<int>(damageLevel * damageMultiplier);
-	}
+	virtual int getDamageRate(int distance) const override;
 
 protected:
 	virtual float getPrecision(int distance) const { return 1.0f; }
