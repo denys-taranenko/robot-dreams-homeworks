@@ -184,9 +184,9 @@ void runTests()
             end_time = std::chrono::high_resolution_clock::now();
             elapsed_time = end_time - start_time;
 
-            double time = elapsed_time.count();
+            volatile double time = elapsed_time.count();
 
-            double boost = (num_thread == 1) ? 1 : time_single / time;
+            double boost = static_cast<double>(result_single) / static_cast<double>(result_multi);
 
             std::cout << std::setw(10) << size << std::setw(20) << time << std::setw(20) << boost << std::endl;
         }
